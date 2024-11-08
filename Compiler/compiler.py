@@ -14,9 +14,9 @@ def getPDF(input, css=''):
     })
   return open("temp.pdf")
   
-serif = True
-txtcolor = "#000"
-bgcolor = "#fff"
+serif = False
+txtcolor = "#0000ff"
+bgcolor = "#aaaaaa"
 filePath = "test.md"
   
 # serif, txtcolor, bgcolor, filePath = getFromWebsite()
@@ -25,20 +25,21 @@ def compile(serif, txtcolor, bgcolor, filePath):
   with open(filePath) as file:  
     with open("temp.css", "w") as css:
       css.write("""p, h1, h2, h3, h4, h5, h6 {
-<<<<<<< Updated upstream
-          font-family:""" + 'sans-serif' if not serif else 'serif' + """;
-          color:""" + txtcolor + """
-=======
           font-family: """ + ('sans-serif' if not serif else 'serif') + """;
           color: """ + txtcolor + """;
->>>>>>> Stashed changes
         }
 
         body {
           background-color: """ + bgcolor + """;
         }""")
-    
+      
     getPDF("\n".join(file.readlines()), "temp.css")
     return "temp.pdf"
   
 compile(serif, txtcolor, bgcolor, filePath)
+
+"""
+Test Cases:
+serif = False
+serif = True
+"""
