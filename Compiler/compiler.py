@@ -14,7 +14,7 @@ def getPDF(input, css=''):
     })
   return open("temp.pdf")
   
-serif = True
+serif = False
 txtcolor = "#0000ff"
 bgcolor = "#aaaaaa"
 filePath = "test.md"
@@ -23,17 +23,15 @@ filePath = "test.md"
 
 def compile(serif, txtcolor, bgcolor, filePath):
   with open(filePath) as file:  
-    css = open("temp.css", "w")
-    css.write("""p, h1, h2, h3, h4, h5, h6 {
-      font-family:""" + 'sans-serif' if not serif else 'serif' + """;
-        color:""" + txtcolor + """
-      }
+    with open("temp.css", "w") as css:
+      css.write("""p, h1, h2, h3, h4, h5, h6 {
+        font-family:""" + ('sans-serif' if not serif else 'serif') + """;
+          color:""" + txtcolor + """
+        }
 
-      body {
-        background-color: """ + bgcolor + """;
-      }""")
-      
-    print("""p, h1, h2, h3, h4, h5, h6 {font-family:""" + ('sans-serif' if not serif else 'serif') + """; color:""" + txtcolor + """} body { background-color: """ + bgcolor + """;}""")
+        body {
+          background-color: """ + bgcolor + """;
+        }""")
       
     getPDF("\n".join(file.readlines()), "temp.css")
     return "temp.pdf"

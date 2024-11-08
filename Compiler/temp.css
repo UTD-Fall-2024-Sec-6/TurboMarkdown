@@ -1,7 +1,8 @@
-serif;
-        color:#0000ff
-      }
+p, h1, h2, h3, h4, h5, h6 {
+        font-family:sans-serif;
+          color:#0000ff
+        }
 
-      body {
-        background-color: #aaaaaa;
-      }
+        body {
+          background-color: #aaaaaa;
+        }
