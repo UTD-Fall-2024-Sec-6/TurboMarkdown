@@ -25,8 +25,8 @@ def compile(serif, txtcolor, bgcolor, filePath):
   with open(filePath) as file:  
     with open("temp.css", "w") as css:
       css.write("""p, h1, h2, h3, h4, h5, h6 {
-        font-family:""" + ('sans-serif' if not serif else 'serif') + """;
-          color:""" + txtcolor + """
+          font-family: """ + ('sans-serif' if not serif else 'serif') + """;
+          color: """ + txtcolor + """;
         }
 
         body {
