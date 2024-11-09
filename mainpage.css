@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+}
+
+.left-panel, .right-panel {
+    width: 50%;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.left-panel {
+    background-color: #f2f2f2;
+}
+
+.right-panel {
+    background-color: #fff;
+}
+
+#pdf-preview {
+    border: 1px solid #ccc;
+    padding: 10px;
+    height: 400px;
+    overflow-y: scroll;
+}
