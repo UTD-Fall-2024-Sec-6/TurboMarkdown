@@ -32,6 +32,8 @@ def loader_user(user_id):
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == "POST":
+        if request.form.get("username") == "" or request.form.get("password") == "" or len(request.form.get("username")) > 250 or len(request.form.get("password")) > 250 or " " in request.form.get("username") or " " in request.form.get("password") or not request.form.get("username").isprintable() or not request.form.get("password").isprintable():
+            return render_template("sign_up.html")
         user = Users(username=request.form.get("username"),
                     password=request.form.get("password"))
         db.session.add(user)
