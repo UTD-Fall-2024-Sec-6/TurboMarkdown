@@ -1,0 +1,32 @@
+<!-- Main Page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Compilation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="left-panel">
+            <h1>Markdown Compilation</h1>
+            <form>
+                <input type="file" id="markdown-file">
+                <button type="button">Upload Markdown File</button>
+                <button type="button">Create New Markdown File</button>
+                <button type="button">Compile Markdown to PDF</button>
+                <button type="button">Download PDF</button>
+            </form>
+        </div>
+        <div class="right-panel">
+            <h2>Generated</h2>
+            <div id="pdf-preview">
+                <!-- PDF preview content -->
+                <p>PDF content will be displayed here.</p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

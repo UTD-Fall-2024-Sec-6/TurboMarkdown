@@ -1,0 +1,34 @@
+<!-- Login up -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-left">
+            <h1>LOGIN HERE!!</h1>
+            <form id="login-form">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter your username" required>
+                
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+                
+                <button type="submit">Login</button>
+                <a href="#" class="forgot-password">Forgot Password?</a>
+            </form>
+        </div>
+        <div class="login-right">
+            <h2>Welcome to</h2>
+            <h1>Turbo Markdown!!!</h1>
+            <div class="flame-icon">🔥</div>
+            <button onclick="window.location.href='signup.html'" class="create-account">Create Account</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
