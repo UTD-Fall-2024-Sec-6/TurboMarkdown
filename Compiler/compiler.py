@@ -4,7 +4,7 @@ import pdfkit
 def getPDF(input, css=''):
   html = markdown.markdown(input)
   if(css != ''):
-    pdfkit.from_string(html, "temp.pdf", verbose=True, css=css, options={
+    pdfkit.from_string(html, "generated_pdf_from_md.pdf", verbose=True, css=css, options={
       'page-size': 'Letter',
       'margin-top': '1.0in',
       'margin-right': '1.0in',
@@ -12,12 +12,7 @@ def getPDF(input, css=''):
       'margin-left': '1.0in',
       'encoding': "UTF-8",
     })
-  return open("temp.pdf")
-  
-serif = False
-txtcolor = "#0000ff"
-bgcolor = "#aaaaaa"
-filePath = "test.md"
+  return open("generated_pdf_from_md.pdf")
   
 # serif, txtcolor, bgcolor, filePath = getFromWebsite()
 
@@ -34,9 +29,7 @@ def compile(serif, txtcolor, bgcolor, filePath):
         }""")
       
     getPDF("\n".join(file.readlines()), "temp.css")
-    return "temp.pdf"
-  
-compile(serif, txtcolor, bgcolor, filePath)
+    return "generated_pdf_from_md.pdf"
 
 """
 Test Cases:

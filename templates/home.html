@@ -1,23 +1,48 @@
+<!-- Main Page -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>TurboMarkdown</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
   </head>
   <body>
-    <nav>
-      <ul>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/register">Create account</a></li>
-      </ul>
-    </nav>
-    {% if current_user.is_authenticated %}
-    <h1>You are logged in</h1>
-    <a href="/logout">Logout</a>
-    {% else %}
-    <h1>You are not logged in</h1>
-    {% endif %}
+    {% with messages = get_flashed_messages() %}
+    <div class="main-container">
+      <div class="left-panel">
+        <h1>TurboMarkdown</h1>
+        <form enctype="multipart/form-data" method="POST" action="/upload">
+          <input type="file" name="file" id="markdown-file" />
+          <button type="submit">Compile Markdown to PDF</button>
+        </form>
+        {% if messages %} {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %} {% endif %}
+      </div>
+      <div class="right-panel">
+        <h2>Preview</h2>
+        {% if messages %} {% for message in messages %} {% if message ==
+        "generated_pdf_from_md.pdf" %}
+        <div id="pdf-preview">
+          <object
+            class="pdf"
+            data="{{ url_for('static', filename='output/generated_pdf_from_md.pdf') }}"
+            width="100%"
+            height="100%"
+          ></object>
+        </div>
+        {% endif %} {% endfor %} {% else %}
+        <div id="pdf-preview">
+          <!-- PDF preview content -->
+          <p>PDF content will be displayed here.</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endwith %}
   </body>
 </html>
