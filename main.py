@@ -142,18 +142,19 @@ def upload():
     return redirect(url_for('home'))
     # General error
 
-@app.route('/download', methods=['POST'])
+@app.route('/download', methods=['GET', 'POST'])
 def download_pdf():
     try:
-        send_file(
-            'generated_pdf_from_md.pdf',
+        return send_file(
+            'static/output/generated_pdf_from_md.pdf',
             as_attachment=True,
             download_name='generated_pdf_from_md.pdf'
         )
-        flash("Download successful")
-        return redirect(url_for('home'))
+        # flash("Download successful")
+        # return redirect(url_for('home'))
     except Exception as e:
         flash("Error downloading file")
+        print(str(e))
         return redirect(url_for('home'))
         # return f"Error downloading file: {str(e)}"
 

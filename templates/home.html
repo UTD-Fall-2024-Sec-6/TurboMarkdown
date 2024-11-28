@@ -35,6 +35,9 @@
             height="100%"
           ></object>
         </div>
+        <form enctype="multipart/form-data" method="GET" action="/download">
+          <button type="submit">Download PDF File</button>
+        </form>
         {% endif %} {% endfor %} {% else %}
         <div id="pdf-preview">
           <!-- PDF preview content -->
