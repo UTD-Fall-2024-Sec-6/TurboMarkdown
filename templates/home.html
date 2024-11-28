@@ -17,11 +17,19 @@
         <h1>TurboMarkdown</h1>
         <form enctype="multipart/form-data" method="POST" action="/upload">
           <input type="file" name="file" id="markdown-file" />
+          <text>Serif?</text>
+          <input type="checkbox" name="serif" id="serif"/>
+          <text>Background</text>
+          <input type="color" name="bg", id="bg", value="#FFFFFF"/>
+          <text>Foreground</text>
+
+          <input type="color" name="fg", id="fg", value="#000000"/>
           <button type="submit">Compile Markdown to PDF</button>
         </form>
         {% if messages %} {% for message in messages %}
         <p>{{ message }}</p>
         {% endfor %} {% endif %}
+        </form>
       </div>
       <div class="right-panel">
         <h2>Preview</h2>

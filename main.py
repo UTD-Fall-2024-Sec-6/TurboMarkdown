@@ -82,7 +82,7 @@ def login():
         if user.password == request.form.get("password"):
             login_user(user)
             return redirect(url_for("home"))
-    
+
     return render_template("login.html", authenticationFailedReason="General")
 
 # Logout route
@@ -99,33 +99,35 @@ def home():
 # Upload route
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
-    print("hello")
     if request.method == "POST":
         # Check if a file was uploaded
         if 'file' not in request.files:
             print('NoFileUpload', request.files)
             flash('NoFileUpload')
             return redirect(url_for('home'))
-        
+
         file = request.files['file']
-        
+        serif = 'serif' in request.form
+        fg = request.form['fg']
+        bg = request.form['bg']
+
         # If no file selected
         if file.filename == '':
             print('NoFileSelection')
             flash("NoFileSelection")
             return redirect(url_for('home'))
-        
+
         # If file is valid and allowed
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
-            
+
             # Read file content
             try:
                 # with open(filepath, 'r', encoding='utf-8') as f:
                     # content = f.read()
-                compile(False, "#000000", "#ffffff", filepath)
+                compile(serif, fg, bg, filepath)
                 shutil.move("generated_pdf_from_md.pdf", "static/output/generated_pdf_from_md.pdf")
                 shutil.move("temp.css", "static/output/temp.css")
                 print('Generated')
@@ -136,7 +138,7 @@ def upload():
                 flash("Error reading file")
                 return redirect(url_for('home'))
                 # "Error reading file: {str(e)}"
-        
+
     print('General error')
     flash("General")
     return redirect(url_for('home'))
