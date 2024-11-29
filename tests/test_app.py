@@ -64,3 +64,29 @@ def test_register7(client):
         "password": "utdcomets1969",
     })
     assert b"Create an account" in response.data
+
+def test_login1(client):
+    """Login with correct credentials."""
+    response = client.post('/login', data={
+        "username": "1234567890",
+        "password": "utdcomets1969",
+    })
+    assert response.status_code == 302
+
+def test_login2(client):
+    """Try to login with a username that's not in the database."""
+    response = client.post('/login', data={
+        "username": "888",
+        "password": "utdcomets1969",
+    })
+    assert b"Sign in to your account" in response.data
+
+def test_login3(client):
+    """Try to login with a password that doesn't match the one on record."""
+    response = client.post('/login', data={
+        "username": "1234567890",
+        "password": "utdcomets1968",
+    })
+    assert b"Sign in to your account" in response.data
+
+# CLEAR THE EXISTING DATABASE BEFORE RUNNING TEST CASES, should probably create a separate database for testing
