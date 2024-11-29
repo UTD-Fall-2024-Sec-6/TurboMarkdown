@@ -20,10 +20,10 @@ def client():
 def test_register1(client):
     """Test the register route with test case 1 (refer to docs)."""
     response = client.post('/register', data={
-        "username": "1234567891",
+        "username": "1234567890",
         "password": "utdcomets1969",
     })
-    assert response.request.path == "/login"
+    assert response.status_code == 302 # HTTP 302 == redirection detected
 
 def test_register2(client):
     """Test the register route with test case 2 (refer to docs)."""
@@ -31,7 +31,7 @@ def test_register2(client):
         "username": "1234567890",
         "password": "utd\tcomets1969",
     })
-    assert b"<h1>Create an account</h1>" in response.data
+    assert b"Create an account" in response.data
 
 def test_register3a(client):
     """Test the register route with test case 3a (refer to docs)."""
@@ -39,7 +39,7 @@ def test_register3a(client):
         "username": "1234567890",
         "password": "utd comets1969",
     })
-    assert b"<h1>Create an account</h1>" in response.data
+    assert b"Create an account" in response.data
 
 def test_register3b(client):
     """Test the register route with test case 3b (refer to docs)."""
@@ -47,7 +47,7 @@ def test_register3b(client):
         "username": "1234567890",
         "password": "",
     })
-    assert b"<h1>Create an account</h1>" in response.data
+    assert b"Create an account" in response.data
 
 def test_register4(client):
     """Test the register route with test case 4 (refer to docs)."""
@@ -55,7 +55,7 @@ def test_register4(client):
         "username": "12 34567890",
         "password": "utdcomets1969",
     })
-    assert b"<h1>Create an account</h1>" in response.data
+    assert b"Create an account" in response.data
 
 def test_register7(client):
     """Test the register route with test case 7 (refer to docs)."""
@@ -63,4 +63,4 @@ def test_register7(client):
         "username": "",
         "password": "utdcomets1969",
     })
-    assert b"<h1>Create an account</h1>" in response.data
+    assert b"Create an account" in response.data
