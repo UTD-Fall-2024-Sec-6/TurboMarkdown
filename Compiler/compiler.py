@@ -1,6 +1,7 @@
 import markdown
 import pdfkit
 import re
+import unittest
 
 def getPDF(input, css=''):
   html = markdown.markdown(input)
@@ -15,14 +16,14 @@ def getPDF(input, css=''):
     })
   return open("generated_pdf_from_md.pdf")
 
-# serif, txtcolor, bgcolor, filePath = getFromWebsite()
-
 def compile(serif, txtcolor, bgcolor, filePath):
-  check = re.compile("#\\d{6}")
-  if not re.match(check, txtcolor) or not re.match(check, bgcolor):
-    return "temp.pdf"
-  if serif != False and serif != True:
-    return "temp.pdf"
+  check = r"#(\d|[a-f]){6}"
+  if not (bool(re.fullmatch(check, txtcolor)) and bool(re.fullmatch(check, bgcolor))):
+    return "a.pdf"
+
+  if (type(serif) != bool):
+    return "b.pdf"
+
   with open(filePath) as file:
     with open("temp.css", "w") as css:
       css.write("""p, h1, h2, h3, h4, h5, h6 {
@@ -37,8 +38,3 @@ def compile(serif, txtcolor, bgcolor, filePath):
     getPDF("\n".join(file.readlines()), "temp.css")
     return "generated_pdf_from_md.pdf"
 
-"""
-Test Cases:
-serif = False
-serif = True
-"""
