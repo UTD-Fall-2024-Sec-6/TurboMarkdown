@@ -1,5 +1,6 @@
 import markdown
 import pdfkit
+import re
 
 def getPDF(input, css=''):
   html = markdown.markdown(input)
@@ -13,11 +14,16 @@ def getPDF(input, css=''):
       'encoding': "UTF-8",
     })
   return open("generated_pdf_from_md.pdf")
-  
+
 # serif, txtcolor, bgcolor, filePath = getFromWebsite()
 
 def compile(serif, txtcolor, bgcolor, filePath):
-  with open(filePath) as file:  
+  check = re.compile("#\\d{6}")
+  if not re.match(check, txtcolor) or not re.match(check, bgcolor):
+    return "temp.pdf"
+  if serif != False and serif != True:
+    return "temp.pdf"
+  with open(filePath) as file:
     with open("temp.css", "w") as css:
       css.write("""p, h1, h2, h3, h4, h5, h6 {
           font-family: """ + ('sans-serif' if not serif else 'serif') + """;
@@ -27,7 +33,7 @@ def compile(serif, txtcolor, bgcolor, filePath):
         body {
           background-color: """ + bgcolor + """;
         }""")
-      
+
     getPDF("\n".join(file.readlines()), "temp.css")
     return "generated_pdf_from_md.pdf"
 
